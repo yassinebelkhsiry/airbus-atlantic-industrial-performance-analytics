@@ -1,0 +1,17 @@
+# Environnements Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Sorties locales temporaires
+*.log
+.streamlit/secrets.toml

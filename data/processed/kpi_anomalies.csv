@@ -1,0 +1,8 @@
+type_anomalie,nombre_anomalies,cout_non_qualite,temps_cycle_moyen_min,anomalies_critiques
+Défaut dimensionnel,2069,3026705.43,54.48073223779603,254
+Défaut assemblage,1981,2871198.38,54.277092377587074,220
+Retouche peinture,1628,2339532.21,54.109530098280096,174
+Écart documentaire,1533,2228395.65,54.02336594911938,168
+Non-conformité matière,1463,2150592.43,54.07850991114149,162
+Contrôle qualité bloquant,1365,2341462.72,54.3370695970696,456
+Panne machine,1050,1783671.4,54.0283619047619,335

@@ -1,0 +1,2 @@
+taux_conformite,taux_non_conformite,taux_retard_livraison,productivite_moyenne_par_heure,cout_total_non_qualite,temps_cycle_moyen_min,disponibilite_machine_moyenne,nombre_anomalies,anomalies_critiques,volume_total_produit
+0.9471487975613855,0.052851202438614575,0.34983333333333333,70.69989362360997,16802280.23,53.81934375,0.9103869333333333,11089,1769,755839
