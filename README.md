@@ -1,40 +1,128 @@
 # Airbus Atlantic Industrial Performance Analytics
 
-Projet Data Analyst / Data Science consacré au pilotage de la performance industrielle et au suivi des anomalies de production dans un contexte aéronautique.
+![Couverture du projet](reports/assets/couverture_premium_airbus_atlantic.png)
 
-## Contexte métier
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-Data%20Analytics-173B6D?style=for-the-badge&logo=python&logoColor=white">
+  <img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-Dashboard-2F80ED?style=for-the-badge&logo=streamlit&logoColor=white">
+  <img alt="Pandas" src="https://img.shields.io/badge/Pandas-KPI%20Analysis-5F6B7A?style=for-the-badge&logo=pandas&logoColor=white">
+  <img alt="Licence" src="https://img.shields.io/badge/Licence-MIT-white?style=for-the-badge">
+</p>
 
-Dans le cadre d'un stage PFE en Data Analysis chez Airbus Atlantic à Casablanca, ce projet reproduit un cas d'usage professionnel de reporting industriel : consolidation de données de production, nettoyage, suivi d'indicateurs opérationnels, détection d'anomalies et restitution via un dashboard interactif.
+Projet Data Analyst / Data Science consacré au **pilotage de la performance industrielle** et au **suivi des anomalies de production** dans un contexte aéronautique.
 
-Les données utilisées sont synthétiques afin de respecter la confidentialité industrielle. Elles ont été conçues pour représenter un environnement réaliste : ordres de fabrication, lignes de production, volumes, conformité, délais, anomalies qualité, coûts de non-qualité et signaux machine.
+Le projet simule un cas professionnel de stage PFE chez **Airbus Atlantic Casablanca** : automatisation du reporting, analyse de données industrielles, création de KPI, visualisations avancées, dashboard Streamlit et rapport PDF prêt pour un portfolio GitHub.
 
-## Objectifs
+> Les données sont synthétiques afin de respecter la confidentialité industrielle, tout en conservant une structure réaliste de données de production aéronautique.
+
+## Aperçu Exécutif
+
+| Indicateur | Résultat |
+|---|---:|
+| Ordres de fabrication analysés | **12 000** |
+| Volume total produit | **755 839 pièces** |
+| Taux de conformité global | **94,7 %** |
+| Taux de non-conformité | **5,3 %** |
+| Taux de retard livraison | **35,0 %** |
+| Coût total de non-qualité | **16,8 M€** |
+| Anomalies critiques | **1 769** |
+
+## Démonstration Visuelle
+
+### Dashboard et Reporting
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="reports/assets/capture_dashboard_streamlit.png" alt="Dashboard Streamlit">
+      <br><b>Dashboard Streamlit interactif</b>
+    </td>
+    <td width="50%">
+      <img src="reports/assets/capture_powerbi_reporting.png" alt="Prototype Power BI">
+      <br><b>Prototype de reporting Power BI</b>
+    </td>
+  </tr>
+</table>
+
+### Architecture Data et Pipeline Industriel
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="reports/assets/architecture_globale_projet.png" alt="Architecture globale du projet">
+      <br><b>Architecture globale du projet</b>
+    </td>
+    <td width="50%">
+      <img src="reports/assets/pipeline_etl_industriel.png" alt="Pipeline ETL industriel">
+      <br><b>Pipeline ETL industriel</b>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="reports/assets/workflow_analytique_industriel.png" alt="Workflow analytique industriel">
+      <br><b>Workflow analytique industriel</b>
+    </td>
+    <td width="50%">
+      <img src="reports/assets/schema_flux_donnees.png" alt="Schéma des flux de données">
+      <br><b>Schéma des flux de données</b>
+    </td>
+  </tr>
+</table>
+
+### Environnement Aéronautique
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="reports/assets/illustration_site_industriel.png" alt="Site industriel aéronautique">
+      <br><b>Vue industrielle aéronautique</b>
+    </td>
+    <td width="50%">
+      <img src="reports/assets/illustration_usine_aeronautique.png" alt="Atelier de production aéronautique">
+      <br><b>Atelier de production aéronautique</b>
+    </td>
+  </tr>
+</table>
+
+## Objectifs du Projet
 
 - Automatiser le reporting de performance industrielle.
 - Nettoyer et analyser plusieurs milliers de lignes de données de production.
 - Construire des KPI opérationnels liés aux délais, volumes, anomalies et productivité.
 - Identifier les écarts de performance par ligne, site et type de pièce.
-- Produire des visualisations professionnelles adaptées à un portfolio GitHub.
-- Mettre à disposition un dashboard Streamlit pour le pilotage opérationnel.
+- Détecter les anomalies statistiques et les anomalies critiques.
+- Fournir un dashboard interactif pour le pilotage opérationnel.
+- Produire un rapport PDF professionnel de niveau Master / ingénieur.
 
-## Stack technique
+## Stack Technique
 
-- Python : pandas, numpy, scipy
-- Visualisation : matplotlib, seaborn, plotly
-- Dashboard : Streamlit
-- Analyse : notebooks Jupyter
-- Versioning : Git et GitHub
+| Domaine | Outils |
+|---|---|
+| Data processing | Python, Pandas, NumPy |
+| Analyse statistique | Pandas, SciPy |
+| Visualisation | Matplotlib, Seaborn, Plotly |
+| Dashboard | Streamlit |
+| Reporting | Markdown, ReportLab, PDF |
+| Portfolio | Git, GitHub |
 
-## Architecture du projet
+## Architecture du Projet
 
 ```text
 airbus-atlantic-industrial-performance-analytics/
 ├── README.md
+├── LICENSE
 ├── requirements.txt
-├── .gitignore
+├── rapport_stage_airbus_atlantic.md
+├── rapport_stage_airbus_atlantic.pdf
 ├── data/
 │   ├── raw/
+│   │   └── donnees_production_airbus_atlantic.csv
 │   └── processed/
+│       ├── donnees_production_nettoyees.csv
+│       ├── kpi_globaux.csv
+│       ├── kpi_lignes_production.csv
+│       ├── kpi_mensuels.csv
+│       └── kpi_anomalies.csv
 ├── notebooks/
 │   ├── 01_exploration_donnees.ipynb
 │   └── 02_analyse_kpi_industriels.ipynb
@@ -44,75 +132,148 @@ airbus-atlantic-industrial-performance-analytics/
 │   ├── kpi_analysis.py
 │   └── visualizations.py
 ├── reports/
+│   ├── assets/
 │   ├── figures/
+│   ├── generate_stage_report.py
 │   └── rapport_synthese.md
 └── dashboard/
     └── app_streamlit.py
 ```
 
-## Dataset utilisé
+## Dataset
 
-Le dataset contient plus de 10 000 lignes et les colonnes suivantes :
+Le dataset contient plus de **10 000 lignes** et représente des ordres de fabrication industriels.
 
-- `date_production`, `site`, `ligne_production`, `type_piece`, `ordre_fabrication`
-- `quantite_produite`, `quantite_conforme`, `quantite_non_conforme`
-- `temps_cycle_min`, `delai_prevu_jours`, `delai_reel_jours`, `statut_livraison`
-- `type_anomalie`, `gravite_anomalie`, `cout_non_qualite`
-- `operateur_equipe`, `shift`
-- `taux_disponibilite_machine`, `temperature_machine`, `vibration_machine`
+| Famille | Variables |
+|---|---|
+| Production | `date_production`, `site`, `ligne_production`, `type_piece`, `ordre_fabrication` |
+| Volumes | `quantite_produite`, `quantite_conforme`, `quantite_non_conforme` |
+| Délais | `delai_prevu_jours`, `delai_reel_jours`, `statut_livraison` |
+| Qualité | `type_anomalie`, `gravite_anomalie`, `cout_non_qualite` |
+| Organisation | `operateur_equipe`, `shift` |
+| Machine | `taux_disponibilite_machine`, `temperature_machine`, `vibration_machine` |
 
-## KPIs suivis
+## KPI Suivis
 
-1. Taux de conformité
-2. Taux de non-conformité
-3. Taux de retard livraison
-4. Productivité par ligne
-5. Coût de non-qualité
-6. Temps de cycle moyen
-7. Disponibilité machine
-8. Nombre d'anomalies par type
-9. Anomalies critiques
-10. Évolution mensuelle de la performance
+| KPI | Objectif métier |
+|---|---|
+| Taux de conformité | Mesurer la qualité globale de production |
+| Taux de non-conformité | Identifier les pertes qualité |
+| Taux de retard livraison | Suivre la tenue des délais |
+| Productivité par ligne | Comparer la performance des lignes |
+| Coût de non-qualité | Prioriser les actions correctives |
+| Temps de cycle moyen | Surveiller l'efficacité industrielle |
+| Disponibilité machine | Mesurer la stabilité des équipements |
+| Anomalies par type | Identifier les causes fréquentes |
+| Anomalies critiques | Suivre les incidents à fort impact |
+| Performance mensuelle | Observer les tendances temporelles |
 
-## Visualisations
+## Galerie des Visualisations KPI
 
-Les graphiques sont générés automatiquement dans `reports/figures/` :
+<table>
+  <tr>
+    <td width="50%">
+      <img src="reports/figures/evolution_mensuelle_taux_conformite.png" alt="Évolution mensuelle du taux de conformité">
+      <br><b>Évolution mensuelle du taux de conformité</b>
+    </td>
+    <td width="50%">
+      <img src="reports/figures/volume_produit_par_ligne.png" alt="Volume produit par ligne">
+      <br><b>Volume produit par ligne</b>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="reports/figures/top_anomalies.png" alt="Top anomalies">
+      <br><b>Top anomalies de production</b>
+    </td>
+    <td width="50%">
+      <img src="reports/figures/cout_non_qualite_par_mois.png" alt="Coût de non-qualité par mois">
+      <br><b>Coût de non-qualité par mois</b>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="reports/figures/retards_par_ligne_production.png" alt="Retards par ligne">
+      <br><b>Retards par ligne de production</b>
+    </td>
+    <td width="50%">
+      <img src="reports/figures/heatmap_correlation.png" alt="Heatmap de corrélation">
+      <br><b>Heatmap de corrélation</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <img src="reports/figures/distribution_temps_cycle.png" alt="Distribution des temps de cycle">
+      <br><b>Distribution des temps de cycle</b>
+    </td>
+  </tr>
+</table>
 
-![Évolution mensuelle du taux de conformité](reports/figures/evolution_mensuelle_taux_conformite.png)
-![Volume produit par ligne](reports/figures/volume_produit_par_ligne.png)
-![Top anomalies](reports/figures/top_anomalies.png)
-![Coût de non-qualité par mois](reports/figures/cout_non_qualite_par_mois.png)
-![Retards par ligne de production](reports/figures/retards_par_ligne_production.png)
-![Heatmap de corrélation](reports/figures/heatmap_correlation.png)
-![Distribution des temps de cycle](reports/figures/distribution_temps_cycle.png)
+## Captures Techniques
 
-## Rapport de stage
+<table>
+  <tr>
+    <td width="50%">
+      <img src="reports/assets/capture_execution_code.png" alt="Exécution Python">
+      <br><b>Exécution du pipeline Python</b>
+    </td>
+    <td width="50%">
+      <img src="reports/assets/capture_notebook_eda.png" alt="Notebook EDA">
+      <br><b>Notebook d'analyse exploratoire</b>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="reports/assets/capture_sql_reporting.png" alt="SQL Reporting">
+      <br><b>Requête SQL de reporting</b>
+    </td>
+    <td width="50%">
+      <img src="reports/assets/capture_streamlit_code.png" alt="Code Streamlit">
+      <br><b>Code du dashboard Streamlit</b>
+    </td>
+  </tr>
+</table>
 
-Un rapport de stage complet, structuré comme un mémoire de fin d'études Data Analyst en industrie aéronautique, est disponible aux formats Markdown et PDF :
+## Rapport de Stage PFE
 
-- `rapport_stage_airbus_atlantic.md`
-- `rapport_stage_airbus_atlantic.pdf`
+Le projet inclut un rapport complet, structuré comme un mémoire de fin d'études Data Analyst en industrie aéronautique.
 
-Le rapport contient une page de garde premium, une table des matières, les informations académiques FST Mohammedia, l'encadrant pédagogique, l'analyse exploratoire, les KPI industriels, les visualisations, des captures Python, SQL, Power BI et Streamlit, les recommandations métier, les limites, les perspectives IA industrielle et les annexes techniques.
+| Format | Fichier |
+|---|---|
+| PDF | [`rapport_stage_airbus_atlantic.pdf`](rapport_stage_airbus_atlantic.pdf) |
+| Markdown | [`rapport_stage_airbus_atlantic.md`](rapport_stage_airbus_atlantic.md) |
 
-## Résultats clés
+Le rapport contient :
 
-- Le dataset généré contient **12 000 ordres de fabrication** et **755 839 pièces produites**.
-- Le taux de conformité global atteint **94,7 %**, avec un taux de non-conformité de **5,3 %**.
-- Le taux de retard livraison est de **35,0 %**, ce qui justifie un suivi régulier par ligne de production.
+- page de garde premium ;
+- informations académiques FST Mohammedia ;
+- encadrant pédagogique : Monsieur Abdelhak Fahsi ;
+- problématique industrielle ;
+- analyse exploratoire ;
+- KPI industriels ;
+- captures Python, SQL, Power BI et Streamlit ;
+- visualisations et interprétations ;
+- recommandations métier ;
+- limites et perspectives IA industrielle.
+
+## Résultats Clés
+
+- Le taux de conformité global atteint **94,7 %**.
+- Le taux de retard livraison atteint **35,0 %**, ce qui justifie un pilotage régulier par ligne.
 - Le coût total de non-qualité est estimé à **16,8 M€** sur la période analysée.
-- La **Ligne A350** concentre le coût de non-qualité le plus élevé, tandis que la **Ligne Composite** présente le taux de retard le plus important.
+- La **Ligne A350** concentre le coût de non-qualité le plus élevé.
+- La **Ligne Composite** présente le taux de retard le plus important.
 - Les anomalies les plus fréquentes sont les défauts dimensionnels, les défauts d'assemblage et les retouches peinture.
 
-## Recommandations métier
+## Recommandations Métier
 
-- Prioriser les plans d'action qualité sur les anomalies critiques et les familles d'anomalies les plus coûteuses.
+- Prioriser les plans d'action qualité sur les anomalies critiques.
 - Mettre en place un suivi hebdomadaire des lignes cumulant retards, faible disponibilité machine et coût de non-qualité élevé.
 - Automatiser la diffusion des KPI pour réduire le temps de préparation du reporting.
 - Ajouter des seuils d'alerte sur le taux de conformité, les retards et les signaux machine.
-- Croiser les analyses dashboard avec les retours des équipes opérationnelles pour valider les causes racines.
+- Exploiter les signaux température et vibration pour initier une logique de maintenance prédictive.
 
-## Comment exécuter le projet
+## Exécuter le Projet
 
 ```bash
 python -m venv .venv
@@ -125,6 +286,12 @@ python src/kpi_analysis.py
 python src/visualizations.py
 
 streamlit run dashboard/app_streamlit.py
+```
+
+## Régénérer le Rapport PDF
+
+```bash
+python reports/generate_stage_report.py
 ```
 
 ## Commandes GitHub
@@ -141,8 +308,9 @@ git push -u origin main
 ## Auteur
 
 **Yassine BEL-KHSIRY**  
-Master Data Science - Aix-Marseille Université
+Master Data Science  
+FST Mohammedia - Faculté des Sciences et Techniques Mohammedia
 
 ## Licence
 
-Ce projet est distribué sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+Ce projet est distribué sous licence MIT. Voir le fichier [`LICENSE`](LICENSE) pour plus de détails.
