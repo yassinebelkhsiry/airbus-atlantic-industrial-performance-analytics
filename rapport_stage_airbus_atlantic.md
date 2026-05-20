@@ -1,10 +1,8 @@
 # Développement d'une solution de pilotage et d'analyse de performance industrielle basée sur la Data Analytics chez Airbus Atlantic Casablanca
 
-**Établissement :** FST Mohammedia - Faculté des Sciences et Techniques Mohammedia  
-**Encadrant pédagogique :** Monsieur Abdelhak Fahsi  
 **Entreprise :** Airbus Atlantic - Casablanca  
 **Auteur :** Yassine BEL-KHSIRY  
-**Année universitaire 2025-2026**
+**Année universitaire 2023/2024**
 
 ![Page de garde](reports/assets/couverture_premium_airbus_atlantic.png)
 
@@ -31,9 +29,9 @@
 
 ## 1. Remerciements
 
-Je remercie Monsieur Abdelhak Fahsi pour son encadrement pédagogique, ses orientations méthodologiques et son accompagnement dans la structuration de ce travail de fin d'études. Je remercie également FST Mohammedia - Faculté des Sciences et Techniques Mohammedia pour la qualité de la formation et pour les compétences acquises en Data Science, analyse statistique, visualisation et aide à la décision.
-
 Je remercie les équipes opérationnelles associées au contexte industriel d'Airbus Atlantic Casablanca pour l'inspiration métier de ce projet : pilotage de la production, suivi qualité, analyse des retards et amélioration continue.
+
+Ce travail m'a permis de consolider une démarche complète de Data Analytics appliquée à l'industrie : compréhension du besoin métier, préparation des données, création d'indicateurs, visualisation et restitution.
 
 ## 2. Résumé du projet
 
@@ -154,17 +152,9 @@ Les perspectives incluent la détection automatique d'anomalies, la prévision d
 
 ![Roadmap Amelioration Future](reports/assets/roadmap_amelioration_future.png)
 
-![Capture Execution Code](reports/assets/capture_execution_code.png)
-
-![Capture Sql Reporting](reports/assets/capture_sql_reporting.png)
-
-![Capture Notebook Eda](reports/assets/capture_notebook_eda.png)
-
 ![Capture Powerbi Reporting](reports/assets/capture_powerbi_reporting.png)
 
 ![Capture Dashboard Streamlit](reports/assets/capture_dashboard_streamlit.png)
-
-![Capture Streamlit Code](reports/assets/capture_streamlit_code.png)
 
 ### Structure du projet
 

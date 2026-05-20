@@ -29,10 +29,8 @@ ROOT_MD_PATH = ROOT_DIR / "rapport_stage_airbus_atlantic.md"
 
 TITLE = "Développement d'une solution de pilotage et d'analyse de performance industrielle basée sur la Data Analytics chez Airbus Atlantic Casablanca"
 AUTHOR = "Yassine BEL-KHSIRY"
-SCHOOL = "FST Mohammedia - Faculté des Sciences et Techniques Mohammedia"
-SUPERVISOR = "Monsieur Abdelhak Fahsi"
 COMPANY = "Airbus Atlantic - Casablanca"
-YEAR = "Année universitaire 2025-2026"
+YEAR = "Année universitaire 2023/2024"
 
 BLUE = "#173B6D"
 BLUE2 = "#2F80ED"
@@ -99,13 +97,12 @@ def create_cover() -> Path:
     for i in range(8):
         ax.plot([0.4 + i * 0.25, 13.6], [5.1 + i * 0.22, 7.6 - i * 0.08], color="#B9C7D8", lw=0.7, alpha=0.45)
     draw_plane(ax, 8.2, 4.75, 1.22)
-    ax.text(0.75, 6.95, SCHOOL, fontsize=13, color=BLUE, weight="bold")
+    ax.text(0.75, 6.95, COMPANY, fontsize=13, color=BLUE, weight="bold")
     ax.text(0.75, 6.45, "Rapport de stage PFE - Data Analyst", fontsize=18, color=BLUE, weight="bold")
     ax.text(0.75, 5.55, TITLE, fontsize=16, color=DARK, weight="bold", wrap=True)
     ax.text(0.75, 2.25, f"Auteur : {AUTHOR}", fontsize=12.5, color=DARK)
-    ax.text(0.75, 1.85, f"Encadrant pédagogique : {SUPERVISOR}", fontsize=12.5, color=DARK)
-    ax.text(0.75, 1.45, f"Entreprise : {COMPANY}", fontsize=12.5, color=DARK)
-    ax.text(0.75, 1.05, YEAR, fontsize=12.5, color=DARK)
+    ax.text(0.75, 1.85, f"Entreprise : {COMPANY}", fontsize=12.5, color=DARK)
+    ax.text(0.75, 1.45, YEAR, fontsize=12.5, color=DARK)
     ax.add_patch(Rectangle((0.75, 0.62), 4.2, 0.08, color=BLUE2))
     return save(fig, path)
 
@@ -235,10 +232,6 @@ def create_assets(df: pd.DataFrame, kpi: pd.DataFrame) -> None:
         [("MVP", "reporting\nKPI"), ("Automatisation", "pipeline\nplanifié"), ("Alerting", "seuils\nnotifications"), ("ML", "détection\nanomalies"), ("IA industrielle", "prédiction\noptimisation")],
         "Perspectives Data Science et industrie 4.0",
     )
-    create_screenshot("capture_execution_code.png", "Capture d'exécution Python", ["python src/data_generation.py", "Dataset généré : data/raw/donnees_production_airbus_atlantic.csv (12 000 lignes)", "python src/data_cleaning.py", "Données nettoyées : data/processed/donnees_production_nettoyees.csv", "python src/kpi_analysis.py", "KPI générés dans data/processed/", "python src/visualizations.py", "Visualisations générées : reports/figures/"])
-    create_screenshot("capture_sql_reporting.png", "Capture SQL - extraction industrielle", ["-- Extraction des KPI de production par ligne", "SELECT", "  ligne_production,", "  SUM(quantite_produite) AS volume_total,", "  SUM(quantite_conforme) / SUM(quantite_produite) AS taux_conformite,", "  AVG(CASE WHEN delai_reel_jours > delai_prevu_jours THEN 1 ELSE 0 END) AS taux_retard,", "  SUM(cout_non_qualite) AS cout_non_qualite", "FROM production_orders", "WHERE date_production BETWEEN '2024-01-01' AND '2025-12-31'", "GROUP BY ligne_production", "ORDER BY cout_non_qualite DESC;"], "#60A5FA")
-    create_screenshot("capture_notebook_eda.png", "Capture notebook - analyse exploratoire", ["import pandas as pd", "import plotly.express as px", "df = pd.read_csv('data/processed/donnees_production_nettoyees.csv')", "df.describe().T", "df.isna().sum().sort_values(ascending=False)", "fig = px.line(mensuel, x='annee_mois', y='taux_conformite')", "fig.show()", "# Interprétation : suivi mensuel de la stabilité qualité"], "#34D399")
-    create_screenshot("capture_streamlit_code.png", "Capture Streamlit - dashboard", ["import streamlit as st", "df = charger_donnees()", "sites = st.multiselect('Site', sorted(df['site'].unique()))", "st.metric('Taux de conformité', formatter_pourcentage(taux_conformite))", "st.plotly_chart(fig_conformite, use_container_width=True)", "st.dataframe(anomalies_critiques, use_container_width=True)", "# Interface interactive pour le pilotage opérationnel"], "#38BDF8")
     create_powerbi_mock(df, kpi)
 
 
@@ -253,12 +246,8 @@ def markdown_report(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, an
         "schema_flux_donnees.png",
         "architecture_dashboard.png",
         "roadmap_amelioration_future.png",
-        "capture_execution_code.png",
-        "capture_sql_reporting.png",
-        "capture_notebook_eda.png",
         "capture_powerbi_reporting.png",
         "capture_dashboard_streamlit.png",
-        "capture_streamlit_code.png",
     ]
     assets_md = "\n\n".join([f"![{Path(a).stem.replace('_', ' ').title()}](assets/{a})" for a in assets])
     top_line_cost = lines.sort_values("cout_non_qualite", ascending=False).iloc[0]
@@ -266,8 +255,6 @@ def markdown_report(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, an
     top_anomaly = anomalies.iloc[0]
     return f"""# {TITLE}
 
-**Établissement :** {SCHOOL}  
-**Encadrant pédagogique :** {SUPERVISOR}  
 **Entreprise :** {COMPANY}  
 **Auteur :** {AUTHOR}  
 **{YEAR}**
@@ -297,9 +284,9 @@ def markdown_report(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, an
 
 ## 1. Remerciements
 
-Je remercie {SUPERVISOR} pour son encadrement pédagogique, ses orientations méthodologiques et son accompagnement dans la structuration de ce travail de fin d'études. Je remercie également {SCHOOL} pour la qualité de la formation et pour les compétences acquises en Data Science, analyse statistique, visualisation et aide à la décision.
-
 Je remercie les équipes opérationnelles associées au contexte industriel d'Airbus Atlantic Casablanca pour l'inspiration métier de ce projet : pilotage de la production, suivi qualité, analyse des retards et amélioration continue.
+
+Ce travail m'a permis de consolider une démarche complète de Data Analytics appliquée à l'industrie : compréhension du besoin métier, préparation des données, création d'indicateurs, visualisation et restitution.
 
 ## 2. Résumé du projet
 
@@ -487,7 +474,7 @@ def header_footer(canvas, doc):
     canvas.rect(0, h - 0.55 * cm, w, 0.55 * cm, fill=1, stroke=0)
     canvas.setFillColor(colors.white)
     canvas.setFont("Helvetica", 8)
-    canvas.drawString(1.45 * cm, h - 0.36 * cm, "FST Mohammedia | Airbus Atlantic Casablanca | Data Analytics industrielle")
+    canvas.drawString(1.45 * cm, h - 0.36 * cm, "Airbus Atlantic Casablanca | Data Analytics industrielle | 2023/2024")
     canvas.setFillColor(colors.HexColor(GREY))
     canvas.drawRightString(w - 1.45 * cm, 0.75 * cm, f"Page {doc.page}")
     canvas.restoreState()
@@ -502,7 +489,7 @@ def build_pdf(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, anomalie
         img(ASSETS_DIR / "couverture_premium_airbus_atlantic.png", 17.2 * cm),
         Spacer(1, 0.35 * cm),
         para(TITLE, st["CoverTitle"]),
-        para(f"{SCHOOL}<br/>{COMPANY}<br/>Encadrant pédagogique : {SUPERVISOR}<br/>Auteur : {AUTHOR}<br/>{YEAR}", st["CoverMeta"]),
+        para(f"{COMPANY}<br/>Auteur : {AUTHOR}<br/>{YEAR}", st["CoverMeta"]),
         PageBreak(),
     ]
     toc = TableOfContents()
@@ -515,7 +502,7 @@ def build_pdf(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, anomalie
     kpi_rows = [["KPI", "Valeur"], ["Ordres de fabrication", fmt_num(len(df))], ["Volume produit", fmt_num(kpi.loc[0, "volume_total_produit"])], ["Taux de conformité", fmt_pct(kpi.loc[0, "taux_conformite"])], ["Taux de retard", fmt_pct(kpi.loc[0, "taux_retard_livraison"])], ["Coût non-qualité", f"{fmt_num(kpi.loc[0, 'cout_total_non_qualite'])} €"], ["Anomalies critiques", fmt_num(kpi.loc[0, "anomalies_critiques"])]]
 
     sections = [
-        ("1. Remerciements", f"Je remercie {SUPERVISOR} pour son encadrement pédagogique et {SCHOOL} pour le cadre académique de ce projet. Je remercie également les équipes opérationnelles associées au contexte Airbus Atlantic Casablanca pour l'inspiration métier autour du pilotage industriel, de la qualité et de l'amélioration continue."),
+        ("1. Remerciements", "Je remercie les équipes opérationnelles associées au contexte Airbus Atlantic Casablanca pour l'inspiration métier autour du pilotage industriel, de la qualité et de l'amélioration continue. Ce projet m'a permis de consolider une démarche complète de Data Analytics appliquée à l'industrie."),
         ("2. Résumé du projet", "Ce rapport présente une solution complète de pilotage et d'analyse de performance industrielle basée sur la Data Analytics. Le projet couvre la collecte, le nettoyage, l'analyse exploratoire, la création des KPI, l'automatisation du reporting, l'analyse des anomalies et la restitution dans un dashboard interactif."),
         ("3. Introduction générale", "Dans l'industrie aéronautique, la performance opérationnelle dépend de la maîtrise des délais, de la qualité, de la disponibilité machine et de la capacité à détecter rapidement les anomalies. La Data Analytics permet de transformer les données de production en leviers de décision mesurables."),
         ("4. Problématique industrielle", "Comment exploiter les données industrielles afin d'améliorer le pilotage de la production, détecter les anomalies et optimiser les performances opérationnelles chez Airbus Atlantic Casablanca ?"),
@@ -537,7 +524,7 @@ def build_pdf(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, anomalie
         img(ASSETS_DIR / "pipeline_etl_industriel.png", 15.5 * cm),
         para("9. Analyse exploratoire", st["Heading1"]),
         para("L'analyse exploratoire étudie les distributions, corrélations, valeurs manquantes et anomalies statistiques. Elle permet de détecter les lignes sensibles et les familles d'anomalies les plus coûteuses.", st["BodyText"]),
-        img(ASSETS_DIR / "capture_notebook_eda.png", 15.5 * cm),
+        img(ASSETS_DIR / "workflow_analytique_industriel.png", 15.5 * cm),
         para("10. Création des KPI industriels", st["Heading1"]),
         para("Les KPI industriels couvrent la conformité, la non-conformité, les retards, la productivité, le coût de non-qualité, la disponibilité machine, les anomalies par type et les anomalies critiques.", st["BodyText"]),
     ]
@@ -547,24 +534,23 @@ def build_pdf(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, anomalie
     story += [make_table(line_rows, [5.0 * cm, 3.0 * cm, 3.0 * cm, 4.0 * cm])]
 
     media_sections = [
-        ("11. Automatisation du reporting", "capture_execution_code.png", "Le pipeline est automatisé par scripts Python afin de rendre l'analyse reproductible dans VS Code et exploitable dans un portfolio GitHub."),
-        ("12. Analyse SQL et préparation métier", "capture_sql_reporting.png", "La logique SQL permet de formaliser les agrégations industrielles attendues dans un environnement de production réel."),
-        ("13. Dashboard Power BI cible", "capture_powerbi_reporting.png", "La maquette Power BI illustre la logique de reporting métier attendue pour un comité de pilotage opérationnel."),
-        ("14. Dashboard Streamlit", "capture_dashboard_streamlit.png", "Le dashboard Streamlit offre un pilotage interactif avec filtres, cartes KPI, visualisations et tableau des anomalies critiques."),
-        ("15. Architecture dashboard", "architecture_dashboard.png", "L'architecture de l'interface organise les filtres, KPI cards, graphiques, tables critiques et recommandations métier."),
+        ("11. Automatisation du reporting", "pipeline_etl_industriel.png", "Le reporting est automatisé par scripts Python afin de rendre l'analyse reproductible dans VS Code et exploitable dans un portfolio GitHub."),
+        ("12. Dashboard Power BI cible", "capture_powerbi_reporting.png", "La maquette Power BI illustre la logique de reporting métier attendue pour un comité de pilotage opérationnel."),
+        ("13. Dashboard Streamlit", "capture_dashboard_streamlit.png", "Le dashboard Streamlit offre un pilotage interactif avec filtres, cartes KPI, visualisations et tableau des anomalies critiques."),
+        ("14. Architecture dashboard", "architecture_dashboard.png", "L'architecture de l'interface organise les filtres, KPI cards, graphiques, tables critiques et recommandations métier."),
     ]
     for title, asset, body in media_sections:
         story += [para(title, st["Heading1"]), para(body, st["BodyText"]), img(ASSETS_DIR / asset, 15.5 * cm)]
 
-    story += [para("16. Visualisations et interprétations", st["Heading1"])]
+    story += [para("15. Visualisations et interprétations", st["Heading1"])]
     for fig_path in sorted(FIGURES_DIR.glob("*.png")):
         story += [para(fig_path.stem.replace("_", " ").title(), st["Heading2"]), img(fig_path, 15.2 * cm)]
 
     final_assets = [
-        ("17. Recommandations business", "workflow_analytique_industriel.png", "Prioriser les anomalies critiques, surveiller les lignes à fort retard, automatiser les seuils d'alerte et engager une démarche de maintenance prédictive basée sur les signaux machine."),
-        ("18. Limites du projet", "schema_flux_donnees.png", "Les données sont synthétiques, les coûts restent estimatifs et les recommandations doivent être validées par les équipes terrain avant généralisation."),
-        ("19. Perspectives IA industrielle", "roadmap_amelioration_future.png", "Les perspectives incluent la détection automatique d'anomalies, la prédiction des retards, la maintenance prédictive avancée et l'intégration avec une base SQL industrielle."),
-        ("20. Annexes techniques", "architecture_globale_projet.png", "Le dépôt regroupe les données, notebooks, scripts, figures, dashboard et rapports Markdown/PDF."),
+        ("16. Recommandations business", "schema_flux_donnees.png", "Prioriser les anomalies critiques, surveiller les lignes à fort retard, automatiser les seuils d'alerte et engager une démarche de maintenance prédictive basée sur les signaux machine."),
+        ("17. Limites du projet", "architecture_globale_projet.png", "Les données sont synthétiques, les coûts restent estimatifs et les recommandations doivent être validées par les équipes terrain avant généralisation."),
+        ("18. Perspectives IA industrielle", "roadmap_amelioration_future.png", "Les perspectives incluent la détection automatique d'anomalies, la prédiction des retards, la maintenance prédictive avancée et l'intégration avec une base SQL industrielle."),
+        ("19. Annexes techniques", "architecture_globale_projet.png", "Le dépôt regroupe les données, notebooks, scripts, figures, dashboard et rapports Markdown/PDF."),
     ]
     for title, asset, body in final_assets:
         story += [para(title, st["Heading1"]), para(body, st["BodyText"]), img(ASSETS_DIR / asset, 15.5 * cm)]
@@ -574,7 +560,7 @@ def build_pdf(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, anomalie
     taux_retard = df["retard_livraison"].mean()
     cout_non_qualite = df["cout_non_qualite"].sum()
     """)
-    story += [para("Extrait de code KPI", st["Heading2"]), Paragraph(f"<font name='Courier' size='8'>{clean(code)}</font>", st["BodyText"]), img(ASSETS_DIR / "capture_streamlit_code.png", 15.5 * cm)]
+    story += [para("Extrait de code KPI", st["Heading2"]), Paragraph(f"<font name='Courier' size='8'>{clean(code)}</font>", st["BodyText"])]
     doc.multiBuild(story, onFirstPage=header_footer, onLaterPages=header_footer)
 
 

@@ -209,31 +209,6 @@ Le dataset contient plus de **10 000 lignes** et représente des ordres de fabri
   </tr>
 </table>
 
-## Captures Techniques
-
-<table>
-  <tr>
-    <td width="50%">
-      <img src="reports/assets/capture_execution_code.png" alt="Exécution Python">
-      <br><b>Exécution du pipeline Python</b>
-    </td>
-    <td width="50%">
-      <img src="reports/assets/capture_notebook_eda.png" alt="Notebook EDA">
-      <br><b>Notebook d'analyse exploratoire</b>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <img src="reports/assets/capture_sql_reporting.png" alt="SQL Reporting">
-      <br><b>Requête SQL de reporting</b>
-    </td>
-    <td width="50%">
-      <img src="reports/assets/capture_streamlit_code.png" alt="Code Streamlit">
-      <br><b>Code du dashboard Streamlit</b>
-    </td>
-  </tr>
-</table>
-
 ## Rapport de Stage PFE
 
 Le projet inclut un rapport complet, structuré comme un mémoire de fin d'études Data Analyst en industrie aéronautique.
@@ -246,12 +221,11 @@ Le projet inclut un rapport complet, structuré comme un mémoire de fin d'étud
 Le rapport contient :
 
 - page de garde premium ;
-- informations académiques FST Mohammedia ;
-- encadrant pédagogique : Monsieur Abdelhak Fahsi ;
+- année universitaire 2023/2024 ;
 - problématique industrielle ;
 - analyse exploratoire ;
 - KPI industriels ;
-- captures Python, SQL, Power BI et Streamlit ;
+- dashboard, schémas data et visualisations KPI ;
 - visualisations et interprétations ;
 - recommandations métier ;
 - limites et perspectives IA industrielle.
@@ -308,8 +282,7 @@ git push -u origin main
 ## Auteur
 
 **Yassine BEL-KHSIRY**  
-Master Data Science  
-FST Mohammedia - Faculté des Sciences et Techniques Mohammedia
+Master Data Science
 
 ## Licence
 
