@@ -142,3 +142,7 @@ git push -u origin main
 
 **Yassine BEL-KHSIRY**  
 Master Data Science - Aix-Marseille Université
+
+## Licence
+
+Ce projet est distribué sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
