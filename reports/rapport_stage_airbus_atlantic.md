@@ -48,6 +48,8 @@ Les données utilisées sont synthétiques afin de respecter la confidentialité
 | Coût total de non-qualité | 16 802 280 € |
 | Anomalies critiques | 1 769 |
 
+![Synthèse KPI premium](assets/synthese_kpi_premium.png)
+
 ## 3. Introduction générale
 
 Airbus Atlantic Casablanca s'inscrit dans un environnement industriel aéronautique où la qualité, la traçabilité, les délais et la maîtrise des flux sont essentiels. Dans ce type d'organisation, les données de production constituent un levier majeur pour comprendre les écarts, prioriser les actions et sécuriser la performance opérationnelle.
@@ -126,6 +128,8 @@ Le dashboard Streamlit propose des filtres par date, site et ligne de production
 - Exploiter les signaux température et vibration pour initier une logique de maintenance prédictive.
 - Connecter le pipeline à une base SQL et à un reporting Power BI cible.
 
+![Matrice de priorisation métier](assets/matrice_priorisation_metier.png)
+
 ## 16. Limites du projet
 
 Le dataset est synthétique et ne remplace pas une donnée industrielle réelle. Les coûts sont estimés, les dépendances métier sont simplifiées et les recommandations doivent être validées avec les équipes terrain avant déploiement.
@@ -135,6 +139,8 @@ Le dataset est synthétique et ne remplace pas une donnée industrielle réelle.
 Les perspectives incluent la détection automatique d'anomalies, la prévision des retards, la prédiction du coût de non-qualité, la maintenance prédictive avancée et l'intégration d'un système d'alerte industriel.
 
 ## 18. Annexes techniques
+
+![Synthese Kpi Premium](assets/synthese_kpi_premium.png)
 
 ![Illustration Site Industriel](assets/illustration_site_industriel.png)
 
@@ -149,6 +155,8 @@ Les perspectives incluent la détection automatique d'anomalies, la prévision d
 ![Schema Flux Donnees](assets/schema_flux_donnees.png)
 
 ![Architecture Dashboard](assets/architecture_dashboard.png)
+
+![Matrice Priorisation Metier](assets/matrice_priorisation_metier.png)
 
 ![Roadmap Amelioration Future](assets/roadmap_amelioration_future.png)
 

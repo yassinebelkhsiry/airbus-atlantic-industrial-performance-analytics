@@ -193,6 +193,63 @@ def create_powerbi_mock(df: pd.DataFrame, kpi: pd.DataFrame) -> Path:
     return save(fig, ASSETS_DIR / "capture_powerbi_reporting.png")
 
 
+def create_kpi_summary(df: pd.DataFrame, kpi: pd.DataFrame) -> Path:
+    path = ASSETS_DIR / "synthese_kpi_premium.png"
+    fig, ax = plt.subplots(figsize=(14, 7.2), dpi=180)
+    ax.set_xlim(0, 14)
+    ax.set_ylim(0, 7.2)
+    ax.axis("off")
+    ax.add_patch(Rectangle((0, 0), 14, 7.2, color="#F6F9FD"))
+    ax.add_patch(Rectangle((0, 6.35), 14, 0.85, color=BLUE))
+    ax.text(0.6, 6.78, "Synthèse exécutive des KPI industriels", color="white", fontsize=18, weight="bold", va="center")
+    ax.text(0.6, 6.18, "Vue consolidée production, qualité, délais et non-qualité", color=GREY, fontsize=10, va="top")
+
+    cards = [
+        ("Ordres analysés", fmt_num(len(df)), "Périmètre de production"),
+        ("Volume produit", fmt_num(kpi.loc[0, "volume_total_produit"]), "Pièces suivies"),
+        ("Conformité", fmt_pct(kpi.loc[0, "taux_conformite"]), "Qualité globale"),
+        ("Retard livraison", fmt_pct(kpi.loc[0, "taux_retard_livraison"]), "Respect des délais"),
+        ("Coût non-qualité", f"{kpi.loc[0, 'cout_total_non_qualite']/1_000_000:.1f} M€", "Impact économique"),
+        ("Anomalies critiques", fmt_num(kpi.loc[0, "anomalies_critiques"]), "Priorité qualité"),
+    ]
+    for i, (label, value, hint) in enumerate(cards):
+        row = 0 if i < 3 else 1
+        col = i % 3
+        x = 0.75 + col * 4.35
+        y = 3.95 - row * 2.05
+        ax.add_patch(FancyBboxPatch((x, y), 3.85, 1.45, boxstyle="round,pad=0.08,rounding_size=0.10", facecolor="white", edgecolor="#C9D6E6", lw=1.2))
+        ax.add_patch(Rectangle((x, y), 0.12, 1.45, color=BLUE2))
+        ax.text(x + 0.35, y + 1.04, label, fontsize=10.5, color=GREY, weight="bold")
+        ax.text(x + 0.35, y + 0.55, value, fontsize=19, color=BLUE, weight="bold")
+        ax.text(x + 0.35, y + 0.20, hint, fontsize=8.5, color=GREY)
+    ax.text(0.75, 0.72, "Lecture métier : les KPI mettent en évidence un bon niveau de conformité, mais des retards et des coûts de non-qualité qui nécessitent un pilotage régulier par ligne de production.", fontsize=10, color=DARK)
+    return save(fig, path)
+
+
+def create_priority_matrix(lines: pd.DataFrame) -> Path:
+    path = ASSETS_DIR / "matrice_priorisation_metier.png"
+    fig, ax = canvas_base(path, "Matrice de priorisation métier", "Croisement coût de non-qualité et taux de retard par ligne")
+    ax.set_xlim(0, 14)
+    ax.set_ylim(0, 8)
+    plot_ax = fig.add_axes([0.12, 0.18, 0.76, 0.58])
+    plot_ax.set_facecolor("#FFFFFF")
+    plot_ax.grid(alpha=0.25)
+    plot_ax.scatter(lines["taux_retard_livraison"], lines["cout_non_qualite"] / 1_000_000, s=260, color=BLUE2, edgecolor=BLUE, linewidth=1.5)
+    for _, row in lines.iterrows():
+        plot_ax.annotate(row["ligne_production"].replace("Ligne ", ""), (row["taux_retard_livraison"], row["cout_non_qualite"] / 1_000_000), xytext=(7, 5), textcoords="offset points", fontsize=8, color=DARK)
+    plot_ax.axvline(lines["taux_retard_livraison"].median(), color="#94A3B8", linestyle="--", lw=1)
+    plot_ax.axhline((lines["cout_non_qualite"] / 1_000_000).median(), color="#94A3B8", linestyle="--", lw=1)
+    plot_ax.set_xlabel("Taux de retard livraison")
+    plot_ax.set_ylabel("Coût de non-qualité (M€)")
+    plot_ax.xaxis.set_major_formatter(lambda x, _: f"{x:.0%}")
+    plot_ax.set_title("Zones de priorité opérationnelle", color=BLUE, weight="bold")
+    ax.text(10.65, 5.2, "Priorité haute", color=BLUE, fontsize=12, weight="bold")
+    ax.text(10.65, 4.75, "Retard élevé\n+ coût élevé", color=GREY, fontsize=9)
+    ax.text(10.65, 3.5, "Action recommandée", color=BLUE, fontsize=12, weight="bold")
+    ax.text(10.65, 3.05, "Plan qualité ciblé,\nrevue quotidienne,\nsuivi délai.", color=GREY, fontsize=9)
+    return save(fig, path)
+
+
 def create_assets(df: pd.DataFrame, kpi: pd.DataFrame) -> None:
     create_cover()
     create_industrial_visuals()
@@ -232,12 +289,16 @@ def create_assets(df: pd.DataFrame, kpi: pd.DataFrame) -> None:
         [("MVP", "reporting\nKPI"), ("Automatisation", "pipeline\nplanifié"), ("Alerting", "seuils\nnotifications"), ("ML", "détection\nanomalies"), ("IA industrielle", "prédiction\noptimisation")],
         "Perspectives Data Science et industrie 4.0",
     )
+    lines = pd.read_csv(ROOT_DIR / "data" / "processed" / "kpi_lignes_production.csv")
+    create_kpi_summary(df, kpi)
+    create_priority_matrix(lines)
     create_powerbi_mock(df, kpi)
 
 
 def markdown_report(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, anomalies: pd.DataFrame) -> str:
     figures = "\n".join([f"![{p.stem.replace('_', ' ').title()}](figures/{p.name})" for p in sorted(FIGURES_DIR.glob("*.png"))])
     assets = [
+        "synthese_kpi_premium.png",
         "illustration_site_industriel.png",
         "illustration_usine_aeronautique.png",
         "architecture_globale_projet.png",
@@ -245,6 +306,7 @@ def markdown_report(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, an
         "workflow_analytique_industriel.png",
         "schema_flux_donnees.png",
         "architecture_dashboard.png",
+        "matrice_priorisation_metier.png",
         "roadmap_amelioration_future.png",
         "capture_powerbi_reporting.png",
         "capture_dashboard_streamlit.png",
@@ -302,6 +364,8 @@ Les données utilisées sont synthétiques afin de respecter la confidentialité
 | Taux de retard livraison | {fmt_pct(kpi.loc[0, 'taux_retard_livraison'])} |
 | Coût total de non-qualité | {fmt_num(kpi.loc[0, 'cout_total_non_qualite'])} € |
 | Anomalies critiques | {fmt_num(kpi.loc[0, 'anomalies_critiques'])} |
+
+![Synthèse KPI premium](assets/synthese_kpi_premium.png)
 
 ## 3. Introduction générale
 
@@ -374,6 +438,8 @@ Le dashboard Streamlit propose des filtres par date, site et ligne de production
 - Déployer des seuils d'alerte sur conformité, retard et disponibilité machine.
 - Exploiter les signaux température et vibration pour initier une logique de maintenance prédictive.
 - Connecter le pipeline à une base SQL et à un reporting Power BI cible.
+
+![Matrice de priorisation métier](assets/matrice_priorisation_metier.png)
 
 ## 16. Limites du projet
 
@@ -511,7 +577,7 @@ def build_pdf(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, anomalie
     for title, body in sections:
         story += [para(title, st["Heading1"]), para(body, st["BodyText"])]
         if title.startswith("2."):
-            story += [make_table(kpi_rows, [8.2 * cm, 5.0 * cm]), Spacer(1, 0.2 * cm)]
+            story += [make_table(kpi_rows, [8.2 * cm, 5.0 * cm]), Spacer(1, 0.2 * cm), img(ASSETS_DIR / "synthese_kpi_premium.png", 15.5 * cm)]
 
     story += [
         para("6. Technologies utilisées", st["Heading1"]),
@@ -547,7 +613,7 @@ def build_pdf(df: pd.DataFrame, kpi: pd.DataFrame, lines: pd.DataFrame, anomalie
         story += [para(fig_path.stem.replace("_", " ").title(), st["Heading2"]), img(fig_path, 15.2 * cm)]
 
     final_assets = [
-        ("16. Recommandations business", "schema_flux_donnees.png", "Prioriser les anomalies critiques, surveiller les lignes à fort retard, automatiser les seuils d'alerte et engager une démarche de maintenance prédictive basée sur les signaux machine."),
+        ("16. Recommandations business", "matrice_priorisation_metier.png", "Prioriser les anomalies critiques, surveiller les lignes à fort retard, automatiser les seuils d'alerte et engager une démarche de maintenance prédictive basée sur les signaux machine."),
         ("17. Limites du projet", "architecture_globale_projet.png", "Les données sont synthétiques, les coûts restent estimatifs et les recommandations doivent être validées par les équipes terrain avant généralisation."),
         ("18. Perspectives IA industrielle", "roadmap_amelioration_future.png", "Les perspectives incluent la détection automatique d'anomalies, la prédiction des retards, la maintenance prédictive avancée et l'intégration avec une base SQL industrielle."),
         ("19. Annexes techniques", "architecture_globale_projet.png", "Le dépôt regroupe les données, notebooks, scripts, figures, dashboard et rapports Markdown/PDF."),

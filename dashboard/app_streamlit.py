@@ -15,8 +15,59 @@ DATA_PATH = ROOT_DIR / "data" / "processed" / "donnees_production_nettoyees.csv"
 
 st.set_page_config(
     page_title="Airbus Atlantic - Performance industrielle",
-    page_icon="✈️",
+    page_icon="A",
     layout="wide",
+)
+
+st.markdown(
+    """
+    <style>
+    .main {
+        background: #f6f9fd;
+    }
+    .block-container {
+        padding-top: 1.3rem;
+        padding-bottom: 2.5rem;
+    }
+    [data-testid="stSidebar"] {
+        background: #102a4c;
+    }
+    [data-testid="stSidebar"] * {
+        color: #f8fafc;
+    }
+    .hero {
+        padding: 1.25rem 1.35rem;
+        border: 1px solid #d8e2ef;
+        background: linear-gradient(135deg, #ffffff 0%, #edf4fb 100%);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    .hero h1 {
+        margin: 0;
+        color: #173b6d;
+        font-size: 2rem;
+        line-height: 1.1;
+    }
+    .hero p {
+        margin: .35rem 0 0 0;
+        color: #5f6b7a;
+        font-size: .98rem;
+    }
+    [data-testid="stMetric"] {
+        background: #ffffff;
+        border: 1px solid #d8e2ef;
+        border-left: 5px solid #2f80ed;
+        border-radius: 8px;
+        padding: .85rem .95rem;
+        box-shadow: 0 8px 22px rgba(23, 59, 109, 0.06);
+    }
+    div[data-testid="stMetricValue"] {
+        color: #173b6d;
+        font-weight: 800;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
 )
 
 
@@ -36,11 +87,18 @@ def afficher_carte_kpi(titre: str, valeur: str, aide: str) -> None:
 
 df = charger_donnees()
 
-st.title("Pilotage de la performance industrielle")
-st.caption("Stage PFE - Data Analyst - Airbus Atlantic, Casablanca")
+st.markdown(
+    """
+    <div class="hero">
+        <h1>Pilotage de la performance industrielle</h1>
+        <p>Dashboard Data Analytics - Airbus Atlantic Casablanca - Stage PFE 2023/2024</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 with st.sidebar:
-    st.header("Filtres")
+    st.header("Filtres de pilotage")
     date_min, date_max = df["date_production"].min().date(), df["date_production"].max().date()
     plage_dates = st.date_input("Période de production", value=(date_min, date_max), min_value=date_min, max_value=date_max)
     sites = st.multiselect("Site", sorted(df["site"].unique()), default=sorted(df["site"].unique()))
@@ -113,8 +171,11 @@ with tab_perf:
             y="taux_conformite",
             markers=True,
             title="Évolution mensuelle du taux de conformité",
+            template="plotly_white",
         )
         fig.update_yaxes(tickformat=".0%")
+        fig.update_traces(line_color="#2F80ED", marker_size=8)
+        fig.update_layout(title_font_color="#173B6D", margin=dict(l=20, r=20, t=55, b=20))
         st.plotly_chart(fig, use_container_width=True)
     with c2:
         fig = px.bar(
@@ -123,7 +184,11 @@ with tab_perf:
             y="ligne_production",
             orientation="h",
             title="Volume produit par ligne",
+            template="plotly_white",
+            color="quantite_produite",
+            color_continuous_scale=["#D7E7F7", "#173B6D"],
         )
+        fig.update_layout(title_font_color="#173B6D", margin=dict(l=20, r=20, t=55, b=20), showlegend=False)
         st.plotly_chart(fig, use_container_width=True)
 
     c3, c4 = st.columns(2)
@@ -134,8 +199,12 @@ with tab_perf:
             y="ligne_production",
             orientation="h",
             title="Retards par ligne de production",
+            template="plotly_white",
+            color="taux_retard",
+            color_continuous_scale=["#D7E7F7", "#D64545"],
         )
         fig.update_xaxes(tickformat=".0%")
+        fig.update_layout(title_font_color="#173B6D", margin=dict(l=20, r=20, t=55, b=20), showlegend=False)
         st.plotly_chart(fig, use_container_width=True)
     with c4:
         fig = px.line(
@@ -144,14 +213,27 @@ with tab_perf:
             y="cout_non_qualite",
             markers=True,
             title="Coût de non-qualité par mois",
+            template="plotly_white",
         )
+        fig.update_traces(line_color="#C44E52", marker_size=8)
+        fig.update_layout(title_font_color="#173B6D", margin=dict(l=20, r=20, t=55, b=20))
         st.plotly_chart(fig, use_container_width=True)
 
 with tab_anomalies:
     anomalies = donnees[donnees["type_anomalie"] != "Aucune"]
     top_anomalies = anomalies["type_anomalie"].value_counts().reset_index()
     top_anomalies.columns = ["type_anomalie", "nombre"]
-    fig = px.bar(top_anomalies, x="nombre", y="type_anomalie", orientation="h", title="Top anomalies")
+    fig = px.bar(
+        top_anomalies,
+        x="nombre",
+        y="type_anomalie",
+        orientation="h",
+        title="Top anomalies",
+        template="plotly_white",
+        color="nombre",
+        color_continuous_scale=["#D7E7F7", "#173B6D"],
+    )
+    fig.update_layout(title_font_color="#173B6D", margin=dict(l=20, r=20, t=55, b=20), showlegend=False)
     st.plotly_chart(fig, use_container_width=True)
 
     critiques = donnees[donnees["anomalie_critique"]].sort_values("cout_non_qualite", ascending=False)

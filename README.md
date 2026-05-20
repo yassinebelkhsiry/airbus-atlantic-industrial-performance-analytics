@@ -2,11 +2,22 @@
 
 ![Couverture du projet](reports/assets/couverture_premium_airbus_atlantic.png)
 
+<h3 align="center">
+  Projet Data Analytics industriel - Airbus Atlantic Casablanca - Stage PFE 2023/2024
+</h3>
+
 <p align="center">
   <img alt="Python" src="https://img.shields.io/badge/Python-Data%20Analytics-173B6D?style=for-the-badge&logo=python&logoColor=white">
   <img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-Dashboard-2F80ED?style=for-the-badge&logo=streamlit&logoColor=white">
   <img alt="Pandas" src="https://img.shields.io/badge/Pandas-KPI%20Analysis-5F6B7A?style=for-the-badge&logo=pandas&logoColor=white">
   <img alt="Licence" src="https://img.shields.io/badge/Licence-MIT-white?style=for-the-badge">
+</p>
+
+<p align="center">
+  <a href="rapport_stage_airbus_atlantic.pdf"><b>Rapport PDF</b></a> ·
+  <a href="dashboard/app_streamlit.py"><b>Dashboard Streamlit</b></a> ·
+  <a href="reports/figures"><b>Visualisations KPI</b></a> ·
+  <a href="src"><b>Code source</b></a>
 </p>
 
 Projet Data Analyst / Data Science consacré au **pilotage de la performance industrielle** et au **suivi des anomalies de production** dans un contexte aéronautique.
@@ -16,6 +27,8 @@ Le projet simule un cas professionnel de stage PFE chez **Airbus Atlantic Casabl
 > Les données sont synthétiques afin de respecter la confidentialité industrielle, tout en conservant une structure réaliste de données de production aéronautique.
 
 ## Aperçu Exécutif
+
+![Synthèse KPI premium](reports/assets/synthese_kpi_premium.png)
 
 | Indicateur | Résultat |
 |---|---:|
@@ -40,6 +53,21 @@ Le projet simule un cas professionnel de stage PFE chez **Airbus Atlantic Casabl
     <td width="50%">
       <img src="reports/assets/capture_powerbi_reporting.png" alt="Prototype Power BI">
       <br><b>Prototype de reporting Power BI</b>
+    </td>
+  </tr>
+</table>
+
+### Synthèse Décisionnelle
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="reports/assets/synthese_kpi_premium.png" alt="Synthèse KPI premium">
+      <br><b>Synthèse exécutive des KPI</b>
+    </td>
+    <td width="50%">
+      <img src="reports/assets/matrice_priorisation_metier.png" alt="Matrice de priorisation métier">
+      <br><b>Matrice de priorisation métier</b>
     </td>
   </tr>
 </table>
